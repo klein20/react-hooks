@@ -17,7 +17,22 @@ const Todo = props => {
       }
       setTodoList(todos);
     });
+    return () => {
+      console.log('Cleanup');
+    };
   }, []);
+
+  const mouseMoveHandler =  event => {
+    console.log(event.clientX, event.clientY);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousemove', mouseMoveHandler);
+    return () => {
+      document.removeEventListener('mousemove', mouseMoveHandler);
+    };
+  }, []);
+
   const inputChangeHandler = event => {
     setTodoName(event.target.value);
     // setTodoState({userInput: event.target.value, todoList: todoState.todoList});
